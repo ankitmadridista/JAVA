@@ -1,3 +1,5 @@
+package p1;
+
 import java.util.*;
 
 class Employee {
@@ -9,10 +11,26 @@ class Employee {
         this.empId = empId;
         this.name = name;
         this.salary = salary;
-    }   
+    }
+
+	@Override
+	public String toString() {
+		return "Employee empId=" + empId + ", name=" + name + ", salary=" + salary;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		Employee other = (Employee) obj;
+			return empId == other.empId;
+	}   
+	
+    
 }
 
 class Q50{
+	
     public static void main(String[] args) {
        Employee e[] = new Employee[3];
        Scanner sc = new Scanner(System.in);
@@ -30,18 +48,29 @@ class Q50{
                 k++; //k=1
             }
             else{
+            	int flag = 0;
                 for( int j = 0 ; j < k ; j++ ){//0 1 2
-                    if(  e1.equals(e[j]) ) { 
+                	//System.out.println("i: "+i+" j: "+j+" k: "+k);
+                	//System.out.println("e1: "+e1+" e"+j+": "+e[j]);
+                    if(  e1.equals( e[j] ) ) {                     	
                         System.out.println("empId already exist");
-                    }
-                    else{
-                        k++;
-                        e[i] = e1;
+                      //  System.out.println(e1.name+ " " + e[j].name);
+                        flag = 1;
+                        i = i-1;
                         break;
-                        
                     }
+                    
                 }
+                if( flag == 0 ) {
+                    k++;
+                    e[i] = e1;
+                } 
             }
         }
+       
+       for( Employee x : e ) {
+    	   System.out.println( x );
+       }
+       sc.close();
     }
 }
